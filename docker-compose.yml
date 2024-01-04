@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  activemq:
+    image: rmohr/activemq:latest
+    container_name: activemq
+    environment:
+      - "TZ=Europe/Amsterdam"
+    volumes:
+      - "activemq-data:/etc/activemq/conf"
+      - "activemq-data:/var/lib/activemq/data"
+      - "activemq-data:/opt/activemq/conf"
+      - "activemq-data:/opt/activemq/data"
+    ports:
+      - "8161:8161"
+      - "61616:61616"
+
+  rabbitmq:
+    image: rabbitmq:management
+    restart: "no"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+volumes:
+  activemq-data: {}
